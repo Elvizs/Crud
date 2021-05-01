@@ -25,7 +25,6 @@ public class Cliente {
 	private String nome;
 
 	@Column(nullable = false, length = 14)
-	// @Pattern(regexp = "^[0-9]{1,14}$", message= "cpf invalido")
 	private String cpfCnpj;
 
 	@Column(nullable = false, length = 50)
