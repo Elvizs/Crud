@@ -1,5 +1,6 @@
 package com.vivere.crud.controller;
 
+import java.io.FileNotFoundException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +20,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.vivere.crud.entity.Usuario;
 import com.vivere.crud.repository.UsuarioRepository;
+import com.vivere.crud.service.JasperUsuario;
+
+import net.sf.jasperreports.engine.JRException;
 
 @RestController
 public class UsuarioController {
 
+	
+	@Autowired
+	JasperUsuario jasperUsuario;
+	
 	@Autowired
 	UsuarioRepository usuarioRepository;
 
@@ -74,5 +82,9 @@ public class UsuarioController {
 	}
 		
 		
+		@GetMapping(value="/report/{format}")
+		public String generateReport (@PathVariable String format) throws FileNotFoundException, JRException{
+		return jasperUsuario.exportReport(format);
+		}
 
 }
